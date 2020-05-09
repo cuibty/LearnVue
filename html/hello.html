@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>Hello Word</title>
+    <style>
+        .green{
+            color: green;
+            font-size: 32px;
+        }
+        .dyattr{
+            color:yellow;
+            font-size: 32px;
+        }
+        .active{
+            color: blue;
+            font-size: 32px;
+        }
+        .active2{
+            background-color: yellow;
+        }
+    </style>
 </head>
 <body>
  <div id="app">
@@ -14,6 +31,16 @@
      <span title="静态数据">
          静态数据
      </span>
+     <p v-once>{{vOnceData}}</p>
+     <p v-html="vHtmlData"></p>
+     <p v-bind:id="vBindId">Id绑定</p>
+     <p v-bind:class="vBindClass">class绑定</p>
+     <p :class="['active','active2']">绑定数组clas</p>
+     <p :style="style1">style绑定</p>
+     <p :id="vBind3">参数绑定简写</p>
+     <!-- <p v-bind:[dyattr]>动态绑定参数</p> -->
+     <p>{{ok3?'Yes':'NO'}}</p>
+     <p v-bind:class="{active:isActive}">动态Class绑定</p>
     <input type="text" v-bind:value="textData" v-bind:title="textData"/>
      <p v-if="pSeen">v-if</p>
      <li v-for="d in forData">
@@ -21,26 +48,56 @@
      </li>
      <p>{{message}}</p>
      <button v-on:click="vOnTest">vOnTest</button>
+     <button @click="ClickTest">@Click-test</button>
      <p>{{vModelData}}</p>
      <input type="text" v-model="vModelData"/>
+     <p> 条件渲染:</p>
+     <div v-if="ifVal==='A'">A</div>
+     <div v-else-if="ifVal==='B'">B</div>
+     <div v-else-if="ifVal==='C'">C</div>
+     <div v-else>
+         No
+     </div>
  </div>
 <script>
     const app = new Vue({
         el: "#app",
         data: {
             message: "hello Word",
+            vOnceData:"vOnceData",
+            vBindId:"id2",
+            vBind3:"vBind3",
+            dyattr:"class",
+            vBindClass:"green",
+            style1:{'color':'red','font-size':'32px'},
+            ok3:true,
+            isActive:true,
+            vHtmlData:"<span style='color: red'>test</span>",
             dymaincData: "动态数据" + new Date().toLocaleString(),
             textData: Math.random(1, 20),
             pSeen: true,
             forData: [{text: "java"}, {text: "C#"}, {text: "php"}],
-            vModelData:"Hello Word"
+            vModelData:"Hello Word",
+            ifVal:"A"
         },
         methods: {
             vOnTest: function () {
                 this.message = this.message.split('').reverse().join('')
             },
+            ClickTest:function(){
+                alert("@Click On")
+            }
+        },
+        //生命周期
+
+        beforeCreate:function() {
+            console.log("test")
         }
     });
+    app.$watch("vModelData",function(newVal,oldVal){
+            console.log(newVal,oldVal)
+    })
+    //console.log(app.$data)
 </script>
 </body>
 </html>
