@@ -58,6 +58,7 @@
      <div v-else>
          No
      </div>
+     <p v-show="vShow">v-show:始终渲染，通过Css显示隐藏</p>
  </div>
 <script>
     const app = new Vue({
@@ -78,7 +79,8 @@
             pSeen: true,
             forData: [{text: "java"}, {text: "C#"}, {text: "php"}],
             vModelData:"Hello Word",
-            ifVal:"A"
+            ifVal:"A",
+            vShow:false
         },
         methods: {
             vOnTest: function () {

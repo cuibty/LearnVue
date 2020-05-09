@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>列表渲染</p>
+    <li v-for="val,index in items">
+        {{"Index:"+index+" Val:"+val.message}}
+    </li>
+    <p></p>
+    <li v-for="val,key in objects">
+        {{"key:"+key+" val:"+val}}
+    </li>
+
+    <p>事件绑定</p>
+    <button @click="counter++">{{counter}}</button>
+    <button @click="clickTest">clickTest</button>
+</div>
+</body>
+<script>
+    var app=new Vue({
+        el:"#app",
+        data:{
+            items:[{message:"mess1"},{message:"mess2"}],
+            objects:{
+                key1:"val1",
+                key2:"val2",
+                key3:"val3"
+            },
+            counter:0
+        },
+        methods:{
+            clickTest:function(){
+              alert("test");
+               alert(this.counter);
+            },
+        }
+    });
+</script>
+</html>
