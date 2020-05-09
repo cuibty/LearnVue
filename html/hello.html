@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Hello Word</title>
+</head>
+<body>
+ <div id="app">
+     {{message}}
+     <span v-bind:title="dymaincData">
+         动态绑定
+     </span>
+     <span title="静态数据">
+         静态数据
+     </span>
+    <input type="text" v-bind:value="textData" v-bind:title="textData"/>
+     <p v-if="pSeen">v-if</p>
+     <li v-for="d in forData">
+            {{d.text}}
+     </li>
+     <p>{{message}}</p>
+     <button v-on:click="vOnTest">vOnTest</button>
+     <p>{{vModelData}}</p>
+     <input type="text" v-model="vModelData"/>
+ </div>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello Word",
+            dymaincData: "动态数据" + new Date().toLocaleString(),
+            textData: Math.random(1, 20),
+            pSeen: true,
+            forData: [{text: "java"}, {text: "C#"}, {text: "php"}],
+            vModelData:"Hello Word"
+        },
+        methods: {
+            vOnTest: function () {
+                this.message = this.message.split('').reverse().join('')
+            },
+        }
+    });
+</script>
+</body>
+</html>
